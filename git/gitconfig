@@ -1,0 +1,5 @@
+[user]
+        name = Kamil Ciomcia
+        email = kamil.ciomcia@gmail.com
+[credential]
+        helper = store
