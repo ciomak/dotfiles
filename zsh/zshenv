@@ -1,0 +1,14 @@
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
+export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}
+export XDG_STATE_HOME=${XDG_STATE_HOME:="$HOME/.local/state"}
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export DOTFILES="$XDG_CONFIG_HOME/dotfiles"
+export ZSH_CACHE_DIR=${ZSH_CACHE_DIR:="$XDG_CACHE_HOME/zsh"}
+export PYENV_ROOT="$XDG_DATA_HOME/pyenv/"
+
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+
