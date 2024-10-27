@@ -1,0 +1,114 @@
+version = 2
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = 'os'
+    style = 'plain'
+    template = ' {{ if .WSL }}WSL at {{ end }}{{.Icon}} '
+    background = 'transparent'
+    foreground = 'p:blue'
+  
+  [[blocks.segments]]
+    type = 'path'
+    style = 'powerline'
+    powerline_symbol = "\ue0bc"
+    background = "p:pink"
+    foreground = "p:crust"
+
+    [blocks.segments.properties]
+      home_icon = "~"
+      style = "full"
+
+  [[blocks.segments]]
+    type = "git"
+    style = "powerline"
+    background = "p:lavender"
+    foreground = "p:crust"
+    powerline_symbol = "\ue0bc"
+    # template = "{{ .HEAD }}"
+    template = "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}"
+
+    [blocks.segments.properties]
+      source = "cli"
+      branch_icon= "\ue725 "
+      cherry_pick_icon = "\ue29b "
+      commit_icon = "\uf417 "
+      fetch_status =  false
+      fetch_upstream_icon = false
+      merge_icon = "\ue727 "
+      no_commits_icon = "\uf0c3 "
+      rebase_icon = "\ue728 "
+      revert_icon = "\uf0e2 "
+      tag_icon = "\uf412 "
+
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+
+  [[blocks.segments]]
+    type = "executiontime"
+    style = "powerline"
+    # powerline_symbol = ""
+    foreground = "#ffffff"
+    background = "transparent"
+    template = " {{ if eq .Code 0 }}<p:green></>{{ else }}<p:red></>{{ end }} {{ .FormattedMs }} "
+
+    [blocks.segments.properties]
+      threshold = 500
+      style = "austin"
+      always_enabled = true
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = 'status'
+    style = 'plain'
+    foreground_templates = [
+      '{{ if gt .Code 0 }}p:red{{ end }}',
+      '{{ if eq .Code 0 }}p:green{{ end }}'
+    ]
+    template = '❯ '
+    foreground = 'p:green'
+
+    [blocks.segments.properties]
+      always_enabled = true
+
+[transient_prompt]
+  foreground = "p:green"
+  background = "transparent"
+  template = "❯ "
+
+[palette]
+  rosewater = "#f5e0dc"
+  flamingo = "#f2cdcd"
+  pink = "#f5c2e7"
+  mauve = "#cba6f7"
+  red = "#f38ba8"
+  maroon = "#eba0ac"
+  peach = "#fab387"
+  yellow = "#f9e2af"
+  green = "#a6e3a1"
+  teal = "#94e2d5"
+  sky = "#89dceb"
+  sapphire = "#74c7ec"
+  blue = "#89b4fa"
+  lavender = "#b4befe"
+  text = "#cdd6f4"
+  subtext0 = "#a6adc8"
+  subtext1 = "#bac2de"
+  overlay0 = "#6c7086"
+  overlay1 = "#7f849c"
+  surface0 = "#313244"
+  surface1 = "#45475a"
+  surface2 = "#585b70"
+  base = "#1e1e2e"
+  mantle = "#181825"
+  crust = "#11111b"

@@ -1,14 +1,59 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.config/zsh/.zhistory
+fastfetch
+
+HISTFILE=$ZDOTDIR/.zhistory
 HISTSIZE=100000
 SAVEHIST=100000
-setopt notify
-unsetopt beep
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/kamilc/.config/zsh/.zshrc'
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+#  +--------+
+#  | prompt |
+#  +--------+
+
+eval "$(oh-my-posh init zsh --config $DOTFILES/zsh/config.omp.toml)"
+
+# autoload -Uz compinit; compinit
+# _comp_options+=(globdots)
+
+source $DOTFILES/zsh/zsh-options.zsh
+source $DOTFILES/zsh/zsh-aliases.zsh
+
+#  +---------+
+#  | plugins |
+#  +---------+
+
+source $DOTFILES/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $DOTFILES/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $DOTFILES/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+#  +-------------+
+#  | completions |
+#  +-------------+
+
+source $DOTFILES/zsh/zsh-completions.zsh
+complete -C /usr/bin/terraform terraform
+
+#  +----------+
+#  | bindings |
+#  +----------+
+
+bindkey -e
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+bindkey "^[[3~" delete-char
+
+#  +-----------+
+#  |    fzf    |
+#  +-----------+
+
+source $DOTFILES/zsh/fzf/fzf.zsh
+source $DOTFILES/zsh/fzf/fzf-scripts.zsh
+
+
+if [[ ! $+commands[pyenv] ]]; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
