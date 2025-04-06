@@ -9,7 +9,16 @@ fi
 HISTFILE=~/.config/zsh/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
+export PATH="$HOME/.local/bin:$PATH"
+export GOPATH="$XDG_DATA_HOME/go"
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a \
+--color=border:#313244,label:#cdd6f4"
 
+zstyle ':fzf-tab:*' fzf-flags $(echo $FZF_DEFAULT_OPTS)
 # +-----------------+
 # +   ZSH OPTIONS   +
 # +-----------------+
@@ -40,20 +49,20 @@ unsetopt BEEP                       # Disables the terminal bell sound.
 
 zle_highlight=('paste:none')        # Prevents highlighting of text when pasting into the terminal.
 
-# +-----------------+
-# +   KEYBINDINGS   +
-# +-----------------+
+fpath=($DOTFILES/zsh/plugins/zsh-completions/src $DOTFILES/zsh/plugins/custom-completions $fpath)
 
-bindkey -e
+autoload -Uz compinit
+compinit
 
 # +-------------+
 # +   PLUGINS   +
 # +-------------+
 
 source $DOTFILES/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
-
-autoload -Uz compinit
-compinit
+source $DOTFILES/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+source $DOTFILES/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $DOTFILES/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
+source $DOTFILES/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 
 # +-------------+
 # +   ALIASES   +
@@ -72,6 +81,17 @@ alias lazypodman="DOCKER_HOST=unix:///run/user/1000/podman/podman.sock lazydocke
 alias system-update="dnf check-update --refresh; sudo dnf update; flatpak update"
 alias venv-activate="[[ -d venv ]] && source venv/bin/activate || source .venv/bin/activate"
 alias venv-deactivate="deactivate"
+alias nv="nvim"
+
+# +-----------------+
+# +   KEYBINDINGS   +
+# +-----------------+
+
+bindkey -e
+bindkey '^p' history-substring-search-up
+bindkey '^n' history-substring-search-down
+
+eval "$(zoxide init zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.config/dotfiles/zsh/.p10k.zsh.
 [[ ! -f $DOTFILES/zsh/.p10k.zsh ]] || source $DOTFILES/zsh/.p10k.zsh
