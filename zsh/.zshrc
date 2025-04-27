@@ -60,6 +60,7 @@ compinit
 
 source $DOTFILES/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
 source $DOTFILES/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+source $DOTFILES/zsh/plugins/fzf-tab-source/fzf-tab-source.plugin.zsh
 source $DOTFILES/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $DOTFILES/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
 source $DOTFILES/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
@@ -71,11 +72,10 @@ source $DOTFILES/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 alias docker-up="sudo systemctl start docker.service"
 alias off="systemctl poweroff"
 alias reboot="systemctl reboot"
-alias l="eza -lah --icons --git --color -I .git"
+alias l="eza -lahg --icons --git --color -I .git"
 alias lt="l -T"
 alias lg="lazygit"
 alias tree="tree -C"
-alias cat="bat"
 alias dive="podman run -ti --rm -v /run/user/1000/podman/podman.sock:/var/run/docker.sock:z wagoodman/dive"
 alias lazypodman="DOCKER_HOST=unix:///run/user/1000/podman/podman.sock lazydocker"
 alias system-update="dnf check-update --refresh; sudo dnf update; flatpak update"
