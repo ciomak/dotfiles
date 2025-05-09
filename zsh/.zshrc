@@ -78,10 +78,11 @@ alias lg="lazygit"
 alias tree="tree -C"
 alias dive="podman run -ti --rm -v /run/user/1000/podman/podman.sock:/var/run/docker.sock:z wagoodman/dive"
 alias lazypodman="DOCKER_HOST=unix:///run/user/1000/podman/podman.sock lazydocker"
-alias system-update="dnf check-update --refresh; sudo dnf update; flatpak update"
+alias system-update="yay -Sy; yay -Qu; yay -Su; flatpak update"
 alias venv-activate="[[ -d venv ]] && source venv/bin/activate || source .venv/bin/activate"
 alias venv-deactivate="deactivate"
 alias nv="nvim"
+alias homelab="podman-compose -f /storage1/homelab/docker-compose.yml -p homelab"
 
 # +-----------------+
 # +   KEYBINDINGS   +
@@ -90,6 +91,16 @@ alias nv="nvim"
 bindkey -e
 bindkey '^p' history-substring-search-up
 bindkey '^n' history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+
+# +---------+
+# +   FZF   +
+# +---------+
+
+source $DOTFILES/zsh/plugins/fzf/fzf.zsh
+source $DOTFILES/zsh/plugins/fzf/fzf-scripts.zsh
 
 eval "$(zoxide init zsh)"
 
